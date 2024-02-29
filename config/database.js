@@ -8,7 +8,7 @@ const connectDB = async () => {
   // If the connection is already established, don't connect to the database again
 
   if (connected) {
-    console.log("=> using existing database connection");
+    console.log("connection already established");
     return;
   }
 
@@ -16,7 +16,7 @@ const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     connected = true;
-    console.log("=> new database connection");
+    console.log("new database connection");
   } catch (error) {
     console.error("Error connecting to database: ", error);
   }

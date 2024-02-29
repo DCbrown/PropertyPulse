@@ -1,11 +1,26 @@
 import Hero from "../components/Hero";
 import InfoBoxes from "@/components/InfoBoxes";
 import Footer from "@/components/Footer";
-import properties from "@/properties.json";
 import PropertyCard from "@/components/PropertyCard";
 import Link from "next/link";
+import { properties } from "@/properties.json";
 
-const HomePage = () => {
+async function fetchProperties() {
+  try {
+    const response = await fetch(`http://localhost:3000/api/properties`);
+    if (!response.ok) {
+      throw new Error("Error fetching properties");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching properties: ", error);
+  }
+}
+
+const HomePage = async () => {
+  const properties = await fetchProperties();
+
   const recentProperties = properties
     .sort(() => Math.random() - Math.random())
     .slice(0, 3);
