@@ -3,20 +3,7 @@ import InfoBoxes from "@/components/InfoBoxes";
 import Footer from "@/components/Footer";
 import PropertyCard from "@/components/PropertyCard";
 import Link from "next/link";
-import { properties } from "@/properties.json";
-
-async function fetchProperties() {
-  try {
-    const response = await fetch(`http://localhost:3000/api/properties`);
-    if (!response.ok) {
-      throw new Error("Error fetching properties");
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching properties: ", error);
-  }
-}
+import { fetchProperties } from "@/utils/request";
 
 const HomePage = async () => {
   const properties = await fetchProperties();
